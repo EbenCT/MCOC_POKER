@@ -1,0 +1,306 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffd700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    font-size: 2.5em;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.hands-section {
+    background: rgba(0,0,0,0.3);
+    border-radius: 15px;
+    padding: 25px;
+    border: 2px solid #ffd700;
+}
+
+.combinations-grid {
+    background: rgba(0,0,0,0.3);
+    border-radius: 15px;
+    padding: 25px;
+    border: 2px solid #ffd700;
+}
+
+.round-indicator {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #ffd700;
+}
+
+.cards-container {
+    margin-bottom: 25px;
+}
+
+.cards-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.card-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.card-slot {
+    width: 80px;
+    height: 110px;
+    border: 2px solid #ffd700;
+    border-radius: 8px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: black;
+    font-weight: bold;
+}
+
+.card-slot.discarded {
+    background: #ff4444;
+    color: white;
+    opacity: 0.7;
+}
+
+.card-value, .card-suit {
+    padding: 3px 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.card-value {
+    width: 50px;
+}
+
+.card-suit {
+    width: 45px;
+}
+
+/* Colores específicos por palo */
+.card-slot[data-suit="🔥"] .card-value {
+    color: #ff4500;
+    font-weight: bold;
+}
+
+.card-slot[data-suit="☄️"] .card-value {
+    color: #ffd700;
+    font-weight: bold;
+}
+
+.card-slot[data-suit="🌩️"] .card-value {
+    color: #1e90ff;
+    font-weight: bold;
+}
+
+.card-slot[data-suit="✊"] .card-value {
+    color: #32cd32;
+    font-weight: bold;
+}
+
+.discard-checkbox {
+    margin-top: 5px;
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: #ffd700;
+    color: #1e3c72;
+}
+
+.btn-primary:hover {
+    background: #ffed4e;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: #4a90e2;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #357abd;
+    transform: translateY(-2px);
+}
+
+.btn-danger {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+}
+
+.combinations {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.combination {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.combination.possible {
+    border-color: #00ff00;
+    background: rgba(0,255,0,0.1);
+}
+
+.combination.current {
+    border-color: #ffd700;
+    background: rgba(255,215,0,0.2);
+}
+
+.combination h3 {
+    color: #ffd700;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+.combination .points {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #00ff88;
+}
+
+.combination .description {
+    font-size: 0.9em;
+    opacity: 0.8;
+    margin-top: 5px;
+}
+
+.advice-section {
+    background: rgba(0,0,0,0.4);
+    border-radius: 15px;
+    padding: 25px;
+    margin-top: 20px;
+    border: 2px solid #00ff88;
+}
+
+.advice-title {
+    color: #00ff88;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.advice-content {
+    font-size: 1.1em;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.probability-section {
+    background: rgba(0,0,0,0.3);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.probability-title {
+    color: #ffd700;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.probability-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding: 5px 10px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 5px;
+}
+
+.current-hand-display {
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.current-hand-display h3 {
+    color: #ffd700;
+    margin-bottom: 10px;
+}
+
+.current-combination {
+    font-size: 1.2em;
+    color: #00ff88;
+    font-weight: bold;
+}
+
+.current-points {
+    font-size: 1.4em;
+    color: #ffd700;
+    margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+    .game-board {
+        grid-template-columns: 1fr;
+    }
+    
+    .cards-row {
+        justify-content: center;
+    }
+    
+    .combinations {
+        grid-template-columns: 1fr;
+    }
+}

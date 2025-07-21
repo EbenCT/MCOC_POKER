@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asesor de Poker - Estrategia de Cartas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🃏 Asesor de Poker Estratégico 🃏</h1>
+        
+        <div class="round-indicator">
+            <span id="roundDisplay">Ronda 1 de 3</span>
+        </div>
+        
+        <div class="game-board">
+            <div class="hands-section">
+                <h2>💳 Tus Cartas</h2>
+                
+                <div class="current-hand-display">
+                    <h3>Mano Actual</h3>
+                    <div class="current-combination" id="currentCombination">-</div>
+                    <div class="current-points" id="currentPoints">0 PTS</div>
+                </div>
+                
+                <div class="cards-container">
+                    <div class="cards-row">
+                        <div class="card-input" data-card="0">
+                            <div class="card-slot" id="card0">
+                                <input type="text" class="card-value" placeholder="2-13,*" maxlength="3">
+                                <select class="card-suit">
+                                    <option value="">Palo</option>
+                                    <option value="🔥">🔥</option>
+                                    <option value="☄️">☄️</option>
+                                    <option value="🌩️">🌩️</option>
+                                    <option value="✊">✊</option>
+                                </select>
+                            </div>
+                            <label><input type="checkbox" class="discard-checkbox"> Descartar</label>
+                        </div>
+                        
+                        <div class="card-input" data-card="1">
+                            <div class="card-slot" id="card1">
+                                <input type="text" class="card-value" placeholder="2-13,*" maxlength="3">
+                                <select class="card-suit">
+                                    <option value="">Palo</option>
+                                    <option value="🔥">🔥</option>
+                                    <option value="☄️">☄️</option>
+                                    <option value="🌩️">🌩️</option>
+                                    <option value="✊">✊</option>
+                                </select>
+                            </div>
+                            <label><input type="checkbox" class="discard-checkbox"> Descartar</label>
+                        </div>
+                        
+                        <div class="card-input" data-card="2">
+                            <div class="card-slot" id="card2">
+                                <input type="text" class="card-value" placeholder="2-13,*" maxlength="3">
+                                <select class="card-suit">
+                                    <option value="">Palo</option>
+                                    <option value="🔥">🔥</option>
+                                    <option value="☄️">☄️</option>
+                                    <option value="🌩️">🌩️</option>
+                                    <option value="✊">✊</option>
+                                </select>
+                            </div>
+                            <label><input type="checkbox" class="discard-checkbox"> Descartar</label>
+                        </div>
+                        
+                        <div class="card-input" data-card="3">
+                            <div class="card-slot" id="card3">
+                                <input type="text" class="card-value" placeholder="2-13,*" maxlength="3">
+                                <select class="card-suit">
+                                    <option value="">Palo</option>
+                                    <option value="🔥">🔥</option>
+                                    <option value="☄️">☄️</option>
+                                    <option value="🌩️">🌩️</option>
+                                    <option value="✊">✊</option>
+                                </select>
+                            </div>
+                            <label><input type="checkbox" class="discard-checkbox"> Descartar</label>
+                        </div>
+                        
+                        <div class="card-input" data-card="4">
+                            <div class="card-slot" id="card4">
+                                <input type="text" class="card-value" placeholder="2-13,*" maxlength="3">
+                                <select class="card-suit">
+                                    <option value="">Palo</option>
+                                    <option value="🔥">🔥</option>
+                                    <option value="☄️">☄️</option>
+                                    <option value="🌩️">🌩️</option>
+                                    <option value="✊">✊</option>
+                                </select>
+                            </div>
+                            <label><input type="checkbox" class="discard-checkbox"> Descartar</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <button class="btn btn-primary" onclick="analyzeHand()">🔍 Analizar Mano</button>
+                    <button class="btn btn-secondary" onclick="nextRound()">➡️ Siguiente Ronda</button>
+                    <button class="btn btn-danger" onclick="cashOut()">💰 Retirarse Ahora</button>
+                    <button class="btn btn-secondary" onclick="resetGame()">🔄 Nuevo Juego</button>
+                </div>
+                
+                <div class="probability-section">
+                    <h3 class="probability-title">📊 Probabilidades de Mejora</h3>
+                    <div id="probabilities"></div>
+                </div>
+            </div>
+            
+            <div class="combinations-grid">
+                <h2>🏆 Clasificación por Escuadrón</h2>
+                <div class="combinations">
+                    <div class="combination" data-type="fuerza_certificada">
+                        <h3>Fuerza Certificada</h3>
+                        <div class="points">10,000 PTS</div>
+                        <div class="description">10, 11, 12, 13, * de la misma facción</div>
+                    </div>
+                    
+                    <div class="combination" data-type="super_trajes">
+                        <h3>Super Trajes</h3>
+                        <div class="points">5,000 PTS</div>
+                        <div class="description">5 de la misma facción con valores secuenciales</div>
+                    </div>
+                    
+                    <div class="combination" data-type="fantastico">
+                        <h3>Fantástico</h3>
+                        <div class="points">1,500 PTS</div>
+                        <div class="description">4 del mismo valor + 1 de cualquier otro</div>
+                    </div>
+                    
+                    <div class="combination" data-type="creador_reyes">
+                        <h3>Creador de Reyes</h3>
+                        <div class="points">850 PTS</div>
+                        <div class="description">3 del mismo valor + 2 de otro valor igual</div>
+                    </div>
+                    
+                    <div class="combination" data-type="reaccion_faccion">
+                        <h3>Reacción de Facción</h3>
+                        <div class="points">800 PTS</div>
+                        <div class="description">5 de la misma facción</div>
+                    </div>
+                    
+                    <div class="combination" data-type="orden_capitan">
+                        <h3>Orden del Capitán</h3>
+                        <div class="points">750 PTS</div>
+                        <div class="description">5 con valores secuenciales</div>
+                    </div>
+                    
+                    <div class="combination" data-type="amenaza_triple">
+                        <h3>Amenaza Triple</h3>
+                        <div class="points">425 PTS</div>
+                        <div class="description">3 iguales + 2 diferentes no iguales</div>
+                    </div>
+                    
+                    <div class="combination" data-type="doble_problema">
+                        <h3>Doble Problema</h3>
+                        <div class="points">325 PTS</div>
+                        <div class="description">2 iguales + 2 iguales + 1 diferente</div>
+                    </div>
+                    
+                    <div class="combination" data-type="el_impar">
+                        <h3>El Impar</h3>
+                        <div class="points">300 PTS</div>
+                        <div class="description">4 de la misma facción + 1 de otra</div>
+                    </div>
+                    
+                    <div class="combination" data-type="cuarto_escalon">
+                        <h3>Cuarto Escalón</h3>
+                        <div class="points">275 PTS</div>
+                        <div class="description">4 secuenciales + 1 no secuencial</div>
+                    </div>
+                    
+                    <div class="combination" data-type="duo_mortal">
+                        <h3>Dúo Mortal</h3>
+                        <div class="points">50 PTS</div>
+                        <div class="description">2 iguales + 3 diferentes</div>
+                    </div>
+                    
+                    <div class="combination" data-type="lobos_solitarios">
+                        <h3>Lobos Solitarios</h3>
+                        <div class="points">10 PTS</div>
+                        <div class="description">Sin combinaciones especiales</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="advice-section">
+            <h2 class="advice-title">🎯 Consejo Estratégico</h2>
+            <div class="advice-content" id="adviceContent">
+                Introduce tus cartas y analiza tu mano para recibir recomendaciones estratégicas.
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
