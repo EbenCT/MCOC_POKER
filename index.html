@@ -103,6 +103,7 @@
                     <button class="btn btn-secondary" onclick="nextRound()">➡️ Siguiente Ronda</button>
                     <button class="btn btn-danger" onclick="cashOut()">💰 Retirarse Ahora</button>
                     <button class="btn btn-secondary" onclick="resetGame()">🔄 Nuevo Juego</button>
+                    <button class="btn btn-primary" onclick="showHelp()">❓ Ayuda</button>
                 </div>
                 
                 <div class="probability-section">
@@ -197,6 +198,15 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Scripts en orden de dependencia -->
+    <script src="config.js"></script>
+    <script src="statistics.js"></script>
+    <script src="game-state.js"></script>
+    <script src="card-logic.js"></script>
+    <script src="probability-calculator.js"></script>
+    <script src="strategy-advisor.js"></script>
+    <script src="ui-controller.js"></script>
+    <script src="enhanced-ui.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
